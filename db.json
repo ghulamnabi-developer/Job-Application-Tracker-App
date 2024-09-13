@@ -1,0 +1,46 @@
+{
+  "applications": [
+    {
+      "id": "1726137473887",
+      "company": "aspire Analytica",
+      "position": "content writer",
+      "status": "rejected",
+      "dateApplied": "2024-09-07"
+    },
+    {
+      "id": "1726137518890",
+      "company": "zapta tech",
+      "position": "android",
+      "status": "interview",
+      "dateApplied": "2024-09-18"
+    },
+    {
+      "id": "1726145660117",
+      "company": "net sole",
+      "position": "laravel developer ",
+      "status": "interview",
+      "dateApplied": "2024-09-20"
+    },
+    {
+      "id": "1726145686893",
+      "company": "zapta",
+      "position": "android   developer",
+      "status": "applied",
+      "dateApplied": "2024-04-18"
+    },
+    {
+      "id": "1726145798929",
+      "company": "devsince",
+      "position": "python Django",
+      "status": "interview",
+      "dateApplied": "2023-03-16"
+    },
+    {
+      "id": "1726208632749",
+      "company": "aspire 2",
+      "position": "laravel developer",
+      "status": "interview",
+      "dateApplied": "2024-07-05"
+    }
+  ]
+}
