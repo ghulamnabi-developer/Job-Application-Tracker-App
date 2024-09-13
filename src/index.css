@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 
-/* Common styles for Login and Signup pages */
+/* Common styles for Login and Signup pages
 
 .auth-container {
     display: flex;
@@ -60,4 +60,110 @@
       opacity: 1;
     }
   }
+
   
+   */
+
+   /* Common styles for Login and Signup pages */
+.auth-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background: linear-gradient(135deg, #6c63ff, #43e97b);
+  animation: fadeIn 1s ease-in-out;
+}
+
+.auth-form {
+  background: white;
+  padding: 3rem;
+  border-radius: 10px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  width: 400px;
+  text-align: center;
+}
+
+.input-field {
+  width: 100%;
+  padding: 0.75rem;
+  margin: 0.5rem 0;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+}
+
+.submit-button {
+  width: 100%;
+  padding: 1rem;
+  background-color: #6c63ff;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submit-button:hover {
+  background-color: #584dff;
+}
+
+.error-message {
+  color: red;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Responsive Media Queries */
+
+/* For tablets and larger devices */
+@media (min-width: 768px) {
+  .auth-form {
+    width: 500px; /* Slightly increase width on larger screens */
+    padding: 3.5rem;
+  }
+}
+
+/* For smaller screens (like phones and small tablets) */
+@media (max-width: 768px) {
+  .auth-form {
+    width: 90%; /* Set width to 90% to ensure responsiveness */
+    padding: 2.5rem; /* Reduce padding */
+  }
+
+  .input-field {
+    padding: 0.6rem; /* Reduce padding on inputs */
+  }
+
+  .submit-button {
+    padding: 0.85rem; /* Adjust button padding */
+  }
+}
+
+/* For extra small screens (portrait phones) */
+@media (max-width: 480px) {
+  .auth-form {
+    width: 95%; /* Stretch form to take almost full width */
+    padding: 2rem; /* Further reduce padding */
+  }
+
+  .input-field {
+    padding: 0.5rem; /* Reduce input padding */
+    margin: 0.4rem 0; /* Adjust margins */
+  }
+
+  .submit-button {
+    padding: 0.75rem; /* Reduce button padding */
+  }
+
+  .error-message {
+    font-size: 0.8rem; /* Reduce font size of error messages */
+  }
+}
