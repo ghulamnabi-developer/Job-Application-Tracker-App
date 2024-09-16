@@ -14,26 +14,33 @@ function Navbar() {
     <nav className="bg-gray-800 text-white p-4 shadow-md">
       <div className="container mx-auto flex items-center justify-between">
         
-        {/* Left Side: Login and Sign Up Buttons */}
-        <div className="flex space-x-2">
+        {/* Left Side: Job Application Tracker Link */}
+        <div className="text-xl font-bold">
+          <Link to="/" className="hover:text-gray-300">
+            Job Application Tracker
+          </Link>
+        </div>
+
+        {/* Center: Applications Link (Visible on large screens) */}
+        <div className="hidden md:flex space-x-4">
+          <Link to="/applications" className="hover:text-gray-300">
+            Applications
+          </Link>
+        </div>
+
+        {/* Right Side: Login and Sign Up Buttons */}
+        <div className="hidden md:flex space-x-4">
           <Link
             to="/login"
-            className="bg-indigo-500 hover:bg-indigo-600 text-white px-3 py-1 rounded-md text-sm"
+            className="bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg"
           >
             Login
           </Link>
           <Link
             to="/signup"
-            className="bg-green-500 hover:bg-green-600 text-white px-3 py-1 rounded-md text-sm"
+            className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg"
           >
             Sign Up
-          </Link>
-        </div>
-
-        {/* Center: Application Tracker App */}
-        <div className="text-xl font-bold">
-          <Link to="/" className="hover:text-gray-300">
-            Job Application Tracker
           </Link>
         </div>
 
@@ -46,13 +53,6 @@ function Navbar() {
             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16m-7 6h7"></path>
           </svg>
         </button>
-
-        {/* Links Section (Visible on medium and larger screens) */}
-        <div className="hidden md:flex space-x-4">
-          <Link to="/applications" className="hover:text-gray-300">
-            Applications
-          </Link>
-        </div>
       </div>
 
       {/* Collapsible Menu for Small Screens with Transition Animation */}
@@ -66,9 +66,23 @@ function Navbar() {
         leaveTo="opacity-0 -translate-y-2"
       >
         <div className="md:hidden">
+          {/* Links in the Hamburger Menu */}
           <div className="px-2 pt-2 pb-3 space-y-2 sm:px-3">
             <Link to="/applications" className="block text-white bg-gray-700 p-2 rounded-md text-center">
               Applications
+            </Link>
+            {/* Buttons inside the Hamburger Menu */}
+            <Link
+              to="/login"
+              className="block bg-indigo-500 hover:bg-indigo-600 text-white p-2 rounded-md text-center"
+            >
+              Login
+            </Link>
+            <Link
+              to="/signup"
+              className="block bg-green-500 hover:bg-green-600 text-white p-2 rounded-md text-center"
+            >
+              Sign Up
             </Link>
           </div>
         </div>
@@ -78,3 +92,4 @@ function Navbar() {
 }
 
 export default Navbar;
+  

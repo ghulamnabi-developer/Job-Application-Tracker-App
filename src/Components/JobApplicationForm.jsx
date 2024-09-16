@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import '../index.css';
 
 function JobApplicationForm({ onSave, applicationToEdit }) {
   const [company, setCompany] = useState('');
