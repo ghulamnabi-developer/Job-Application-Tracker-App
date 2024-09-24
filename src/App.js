@@ -1,5 +1,5 @@
 import Navbar from './Components/Navbar';
-import { BrowserRouter as Router, Routes, Route, Navigate, useLocation, useNavigate } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate, useLocation } from 'react-router-dom';
 import LoginPage from './Components/LoginPage';
 import SignupPage from './Components/SignupPage';
 import JobApplicationForm from './Components/JobApplicationForm';
@@ -7,8 +7,12 @@ import JobApplicationList from './Components/JobApplicationList';
 import axios from 'axios';
 import React, { useState, useEffect } from 'react';
 import Pagination from './Components/Pagination';
+import OTPLoginPage from './Components/OTPLoginPage';
 
-// Main App Component
+// Import CandidateForm and CandidateList components
+import CandidateForm from './Components/CandidateForm';
+import CandidateList from './Components/CandidateList';
+
 function App() {
   const [applications, setApplications] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
@@ -42,7 +46,7 @@ function App() {
   // Update an existing application
   const updateApplication = async (id, updatedData) => {
     try {
-      const response = await axios.put(`http://localhost:5000/applications/${id}`, updatedData);
+      await axios.put(`http://localhost:5000/applications/${id}`, updatedData);
       setApplications(prevApplications =>
         prevApplications.map(app =>
           app.id === id ? { ...app, ...updatedData } : app
@@ -55,6 +59,8 @@ function App() {
 
   // Delete an application
   const deleteApplication = async (id) => {
+    if (!window.confirm("Are you sure you want to delete?")) return;
+
     try {
       await axios.delete(`http://localhost:5000/applications/${id}`);
       setApplications(applications.filter(app => app.id !== id));
@@ -69,36 +75,37 @@ function App() {
   const currentApplications = applications.slice(indexOfFirstApplication, indexOfLastApplication);
   const totalPages = Math.ceil(applications.length / applicationsPerPage);
 
-  // Navbar logic: Hide navbar on login/signup pages
-  const location = useLocation();  // Get current route path
-  const hideNavbarOnAuthPages = location.pathname === '/login' || location.pathname === '/signup';
+  const location = useLocation(); // Get current route path
+  const hideNavbarOnAuthPages = location.pathname === '/login' || location.pathname === '/signup' || location.pathname === '/otp-login';
 
   return (
     <div>
-      <div className="App">
-        {/* Conditionally render Navbar */}
-        {!hideNavbarOnAuthPages && <Navbar />}
-        <div className="container mx-auto p-6">
-          <Routes>
+      {/* Conditionally render Navbar if not on auth pages and logged in */}
+      {!hideNavbarOnAuthPages && isLoggedIn && <Navbar />}
 
-            {/* Login and Signup Routes */}
-            <Route path="/login" element={<LoginPage setIsLoggedIn={setIsLoggedIn} />} />
-            <Route path="/signup" element={<SignupPage />} />
+      <div className="container mx-auto p-6">
+        <Routes>
+          {/* OTP Login Route */}
+          <Route path="/otp-login" element={<OTPLoginPage setIsLoggedIn={setIsLoggedIn} />} />
 
-            {/* Default Route: If not logged in, redirect to login */}
-            <Route path="/" element={isLoggedIn ? <JobApplicationForm onSave={addApplication} /> : <Navigate to="/login" />} />
-            
-            {/* Applications Page */}
-            <Route path="/applications" element={isLoggedIn ? (
-              <JobApplicationList
-                applications={currentApplications}
-                onDelete={deleteApplication}
-                onUpdate={updateApplication}
-              />
-            ) : <Navigate to="/login" />} />
+          {/* Login and Signup Routes */}
+          <Route path="/login" element={<LoginPage setIsLoggedIn={setIsLoggedIn} />} />
+          <Route path="/signup" element={<SignupPage />} />
 
-          </Routes>
-        </div>
+          {/* Protected Routes */}
+          <Route path="/" element={isLoggedIn ? <JobApplicationForm onSave={addApplication} /> : <Navigate to="/otp-login" />} />
+          <Route path="/applications" element={isLoggedIn ? (
+            <JobApplicationList
+              applications={currentApplications}
+              onDelete={deleteApplication}
+              onUpdate={updateApplication}
+            />
+          ) : <Navigate to="/otp-login" />} />
+
+          {/* Candidate Form and List Routes */}
+          <Route path="/candidate-form" element={isLoggedIn ? <CandidateForm /> : <Navigate to="/otp-login" />} />
+          <Route path="/candidate-list" element={isLoggedIn ? <CandidateList /> : <Navigate to="/otp-login" />} />
+        </Routes>
       </div>
 
       {/* Conditionally render pagination if user is logged in */}

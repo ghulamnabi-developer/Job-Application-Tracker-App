@@ -21,27 +21,31 @@ function Navbar() {
           </Link>
         </div>
 
-        {/* Center: Applications Link (Visible on large screens) */}
+        {/* Center: Applications, Add Candidate, and Candidate List Links (Visible on large screens) */}
         <div className="hidden md:flex space-x-4">
-          <Link to="/applications" className="hover:text-gray-300">
+          <Link to="/applications" className="text-lg font-bold hover:text-green-500 hover:underline">
             Applications
+          </Link>
+        
+          <Link to="/candidate-list" className="text-lg font-bold hover:text-green-500 hover:underline">
+            Candidate List
           </Link>
         </div>
 
         {/* Right Side: Login and Sign Up Buttons */}
         <div className="hidden md:flex space-x-4">
           <Link
-            to="/login"
+            to="/candidate-form"
             className="bg-indigo-500 hover:bg-indigo-600 text-white px-4 py-2 rounded-lg"
           >
-            Login
+            Add candidate
           </Link>
-          <Link
+          {/* <Link
             to="/signup"
             className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg"
           >
             Sign Up
-          </Link>
+          </Link> */}
         </div>
 
         {/* Hamburger Menu Icon (visible on small screens) */}
@@ -71,6 +75,13 @@ function Navbar() {
             <Link to="/applications" className="block text-white bg-gray-700 p-2 rounded-md text-center">
               Applications
             </Link>
+            <Link to="/add-candidate" className="block text-white bg-gray-700 p-2 rounded-md text-center">
+              Add Candidate
+            </Link>
+            <Link to="/candidate-list" className="block text-white bg-gray-700 p-2 rounded-md text-center">
+              Candidate List
+            </Link>
+
             {/* Buttons inside the Hamburger Menu */}
             <Link
               to="/login"
@@ -92,4 +103,3 @@ function Navbar() {
 }
 
 export default Navbar;
-  
